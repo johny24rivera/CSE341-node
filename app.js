@@ -2,10 +2,10 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const PORT = process.env.PORT || 5000;
 
 const errorController = require('./controllers/error');
-const mongoConnect = require('./util/database');
 const User = require('./models/user')
 
 const app = express();
@@ -20,12 +20,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-    User.findById('6014fbe7c9e671046488a09e')
-        .then(user => {
-            req.user = new User(user.name, user.email, user.cart, user._id);
-            next();
-        })
-        .catch(err => console.log(err));
+  User.findById('6017a04610404d391cc01ba8')
+    .then(user => {
+      req.user = user;
+      next();
+    })
+    .catch(err => console.log(err));
 });
 
 app.use('/admin', adminRoutes);
@@ -33,6 +33,41 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-mongoConnect.mongoConnect(() => {
+onst cors = require('cors') // Place this with other requires (like 'path' and 'express')
+...
+const corsOptions = {
+  origin: "https://<your_app_name>.herokuapp.com/",
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
+
+const options = {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+  family: 4
+};
+
+const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://GoldCode:aTZGS2Gu0VQJU27G@cluster0.qz6md.mongodb.net/shop?retryWrites=true&w=majority";
+
+mongoose
+  .connect(
+    MONGODB_URL, options
+  )
+  .then(result => {
+    User.findOne().then(user => {
+      if (!user) {
+        const user = new User({
+          name: "Jonathan",
+          email: 'johny24rivera@gmail.com',
+          cart: { items: [] }
+        });
+        user.save();
+      }
+    })
     app.listen(PORT);
-});
+  })
+  .catch(err => {
+    console.log(err);
+  });

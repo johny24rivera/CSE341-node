@@ -22,8 +22,8 @@ let _db;
 
 const mongoConnect = (callback) => {
     MongoClient.connect(
-            'mongodb+srv://GoldCode:aTZGS2Gu0VQJU27G@cluster0.qz6md.mongodb.net/shop?retryWrites=true&w=majority'
-        )
+        ''
+    )
         .then((client) => {
             console.log('Connected');
             _db = client.db();
