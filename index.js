@@ -51,7 +51,7 @@ const options = {
     family: 4
 };
 
-const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://GoldCode:aTZGS2Gu0VQJU27G@cluster0.qz6md.mongodb.net/shop?w=majority&retryWrites=true";
+const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://GoldCode:aTZGS2Gu0VQJU27G@cluster0.qz6md.mongodb.net/shop";
 
 mongoose
     .connect(
