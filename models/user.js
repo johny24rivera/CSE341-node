@@ -19,8 +19,9 @@ const UserSchema = new Schema({
     }
 });
 
-UserSchema.methods.addToCart = function (product) {
+UserSchema.methods.addToCart = function(product) {
     const cartProductIndex = this.cart.items.findIndex(cp => {
+        he
         return cp.productId.toString() === product._id.toString();
     });
 
@@ -32,22 +33,22 @@ UserSchema.methods.addToCart = function (product) {
         updatedCartItems[cartProductIndex].quantity = newQuantity;
     } else {
         updatedCartItems.push({ productId: product._id, quantity: newQuantity });
-    }
-    const updatedCart = { items: updatedCartItems }
-    this.cart = updatedCart
-    return this.save()
+    };
+    const updatedCart = { items: updatedCartItems };
+    this.cart = updatedCart;
+    return this.save();
 }
 
-UserSchema.methods.removeFromCart = function (productId) {
+UserSchema.methods.removeFromCart = function(productId) {
     const updatedCartItems = this.cart.items.filter(item => {
         return item.productId.toString() !== productId.toString();
     });
 
     this.cart.items = updatedCartItems;
-    return this.save()
+    return this.save();
 }
 
-UserSchema.methods.clearCart = function () {
+UserSchema.methods.clearCart = function() {
     this.cart = { items: [] };
     return this.save();
 }

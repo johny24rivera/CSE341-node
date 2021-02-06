@@ -69,7 +69,7 @@ exports.postCart = (req, res, next) => {
         console.log(result);
         res.redirect('/cart');
     }).catch(err => {
-        console.log(err);
+        console.log("ERROR HERE:", err);
         res.redirect('/');
     });
 
