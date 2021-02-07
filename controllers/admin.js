@@ -1,12 +1,17 @@
 const Product = require('../models/product');
 
 exports.getAddProduct = (req, res, next) => {
+    let isLoggedIn = false;
+    if (req.session.isLoggedIn) {
+        isLoggedIn = req.session.isLoggedIn;
+    };
     res.render('admin/edit-product', {
         pageTitle: 'Add Product',
         path: '/admin/add-product',
         editing: false,
-        isAuthenticated: req.isLoggedIn,
+        isAuthenticated: isLoggedIn,
     });
+
 };
 
 exports.postAddProduct = (req, res, next) => {
@@ -19,7 +24,7 @@ exports.postAddProduct = (req, res, next) => {
         price: price,
         description: description,
         imageUrl: imageUrl,
-        userId: req.user
+        userId: req.session.user
     });
     product
         .save()
@@ -44,12 +49,17 @@ exports.getEditProduct = (req, res, next) => {
             if (!product) {
                 return res.redirect('/');
             }
+            let isLoggedIn = false;
+
+            if (req.session.isLoggedIn) {
+                isLoggedIn = req.session.isLoggedIn;
+            };
             res.render('admin/edit-product', {
                 pageTitle: 'Edit Product',
                 path: '/admin/edit-product',
                 editing: editMode,
                 product: product,
-                isAuthenticated: req.isLoggedIn,
+                isAuthenticated: isLoggedIn,
             });
         })
         .catch(err => console.log(err));
@@ -62,12 +72,12 @@ exports.postEditProduct = (req, res, next) => {
     const updatedImageUrl = req.body.imageUrl;
     const updatedDesc = req.body.description;
     Product.findById(prodId).then(product => {
-        product.title = updatedTitle;
-        product.price = updatedPrice;
-        product.imageUrl = updatedImageUrl;
-        product.description = updatedDesc;
-        return product.save()
-    })
+            product.title = updatedTitle;
+            product.price = updatedPrice;
+            product.imageUrl = updatedImageUrl;
+            product.description = updatedDesc;
+            return product.save()
+        })
         .then(result => {
             console.log('UPDATED PRODUCT!');
             res.redirect('/admin/products');
@@ -79,11 +89,16 @@ exports.getProducts = (req, res, next) => {
     Product.find()
         .populate('userId')
         .then(products => {
+            let isLoggedIn = false;
+
+            if (req.session.isLoggedIn) {
+                isLoggedIn = req.session.isLoggedIn;
+            };
             res.render('admin/products', {
                 prods: products,
                 pageTitle: 'Admin Products',
                 path: '/admin/products',
-                isAuthenticated: req.isLoggedIn,
+                isAuthenticated: isLoggedIn,
             });
         })
         .catch(err => console.log(err));
