@@ -8,3 +8,7 @@
 .signup {
     margin-top: 5vh;
 }
+
+.errorMessage {
+    color: red;
+}

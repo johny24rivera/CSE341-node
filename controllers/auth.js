@@ -12,6 +12,7 @@ exports.getLogin = (req, res, next) => {
         path: '/login',
         pageTitle: 'Login',
         isAuthenticated: isLoggedIn,
+        errorMessage: req.flash('error'),
     });
 };
 
@@ -21,6 +22,7 @@ exports.postLogin = (req, res, next) => {
     User.findOne({ email: email })
         .then(user => {
             if (!user) {
+                req.flash('error', 'Email was not found');
                 res.redirect('/login');
             }
             bcrypt.compare(password, user.password)
@@ -33,6 +35,7 @@ exports.postLogin = (req, res, next) => {
                             res.redirect('/');
                         });
                     } else {
+                        req.flash('error', 'Password was Incorrect');
                         return res.redirect('/login');
                     };
                 })
@@ -55,6 +58,7 @@ exports.getSignup = (req, res, next) => {
         path: '/signup',
         pageTitle: 'Signup',
         isAuthenticated: isLoggedIn,
+        errorMessage: req.flash('error'),
     });
 };
 
@@ -63,9 +67,15 @@ exports.postSignup = (req, res, next) => {
     const password = req.body.password;
     const check = req.body.confirmPassword;
 
+    if (password !== check) {
+        req.flash('error', 'Passwords do not match');
+        return res.redirect('/signup');
+    };
+
     User.findOne({ email: email })
         .then(userDoc => {
             if (userDoc) {
+                req.flash('error', 'User already exists');
                 return res.redirect('/signup');
             }
             return bcrypt.hash(password, 12)

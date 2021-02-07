@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const flash = require('connect-flash');
 
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = "mongodb+srv://GoldCode:aTZGS2Gu0VQJU27G@cluster0.qz6md.mongodb.net/shop"
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
         })
         .catch(err => console.log(err));
 });
+app.use(flash());
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
