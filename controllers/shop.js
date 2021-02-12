@@ -74,6 +74,7 @@ exports.getCart = (req, res, next) => {
             if (req.session.isLoggedIn) {
                 isLoggedIn = req.session.isLoggedIn;
             };
+
             const products = user.cart.items;
             res.render('shop/cart', {
                 path: '/cart',

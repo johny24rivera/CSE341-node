@@ -26,7 +26,8 @@ app.set('views', 'views');
 
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
-const authRoutes = require('./routes/auth')
+const authRoutes = require('./routes/auth');
+const locationRoutes = require('./routes/location');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -48,6 +49,7 @@ app.use(flash());
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
+app.use(locationRoutes);
 
 app.use(errorController.get404);
 

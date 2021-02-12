@@ -6,7 +6,7 @@
         <%- include('../includes/navigation.ejs') %>
 
             <main>
-                <% if (prods.length> 0) { %>
+                <!-- <% if (prods.length> 0) { %>
                     <div class="grid">
                         <% for (let product of prods) { %>
                             <article class="card product-item">
@@ -34,6 +34,84 @@
                     </div>
                     <% } else { %>
                         <h1>No Products Found!</h1>
-                        <% } %>
+                        <% } %> -->
+
+                <div class="simple-slider">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" style="background-image:url(https://placeholdit.imgix.net/~text?txtsize=68&amp;txt=Slideshow+Image&amp;w=1920&amp;h=500);"><img src="/img/landscape-1.jpg"></div>
+                            <div class="swiper-slide" style="background-image:url(https://placeholdit.imgix.net/~text?txtsize=68&amp;txt=Slideshow+Image&amp;w=1920&amp;h=500);"><img src="/img/landscape-2.jpg"></div>
+                            <div class="swiper-slide" style="background-image:url(https://placeholdit.imgix.net/~text?txtsize=68&amp;txt=Slideshow+Image&amp;w=1920&amp;h=500);"><img src="/img/landscape-3.jpg"></div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+                <div class="photo-gallery">
+                    <div class="container">
+                        <div class="intro">
+                            <h2 class="text-center">Amazing Food</h2>
+                            <p class="text-center">Try out our great selection of delicious and unique shakes, crepes and other deserts.</p>
+                        </div>
+                        <div class="row photos">
+                            <div class="col-sm-6 col-md-4 col-lg-3 item">
+                                <a data-lightbox="photos" href="/img/desk.jpg"><img class="img-fluid" src="/img/crepes-1.jpg"></a>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-3 item">
+                                <a data-lightbox="photos" href="/img/building.jpg"><img class="img-fluid" src="/img/shake-2.jpg"></a>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-3 item">
+                                <a data-lightbox="photos" href="/img/loft.jpg"><img class="img-fluid" src="/img/crepes-2.jpg"></a>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-3 item">
+                                <a data-lightbox="photos" href="/img/building.jpg"><img class="img-fluid" src="/img/shake-3.jpg"></a>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-3 item">
+                                <a data-lightbox="photos" href="/img/loft.jpg"><img class="img-fluid" src="/img/shake-1.jpg"></a>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-3 item">
+                                <a data-lightbox="photos" href="/img/desk.jpg"><img class="img-fluid" src="/img/waffle-1.jpg"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-clean">
+                    <div class="container">
+                        <div class="intro">
+                            <h2 class="text-center">Reviews</h2>
+                            <p class="text-center">Our customers love us! Read what they have to say below.</p>
+                        </div>
+                        <div class="row people">
+                            <div class="col-md-6 col-lg-4 item">
+                                <div class="box">
+                                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est.</p>
+                                </div>
+                                <div class="author"><img class="rounded-circle" src="/img/1.jpg">
+                                    <h5 class="name">Ben Johnson</h5>
+                                    <p class="title">CEO of Company Inc.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 item">
+                                <div class="box">
+                                    <p class="description">Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id.</p>
+                                </div>
+                                <div class="author"><img class="rounded-circle" src="/img/3.jpg">
+                                    <h5 class="name">Carl Kent</h5>
+                                    <p class="title">Founder of Style Co.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 item">
+                                <div class="box">
+                                    <p class="description">Aliquam varius finibus est, et interdum justo suscipit. Vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p>
+                                </div>
+                                <div class="author"><img class="rounded-circle" src="/img/2.jpg">
+                                    <h5 class="name">Emily Clark</h5>
+                                    <p class="title">Owner of Creative Ltd.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
             <%- include('../includes/end.ejs') %>

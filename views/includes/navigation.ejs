@@ -1,7 +1,7 @@
 <div class="backdrop"></div>
 <header class="main-header">
-    <button id="side-menu-toggle">Menu</button>
-    <nav class="main-header__nav">
+    <!-- <button id="side-menu-toggle">Menu</button> -->
+    <!-- <nav class="main-header__nav">
         <ul class="main-header__item-list">
             <li class="main-header__item">
                 <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
@@ -40,32 +40,55 @@
                     </li>
                     <% } %>
         </ul>
+    </nav> -->
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean">
+        <div class="container"><a class="navbar-brand" href="/">Crepes n Shakes</a><button class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/products">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/location">Hours and Locations</a></li>
+                    <% if (isAuthenticated) { %>
+                        <li class="nav-item"><a class="nav-link" href="/admin/add-product">Add Product</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/admin/products">Admin Products</a></li>
+                        <% } %>
+                </ul>
+            </div>
+        </div>
+        <% if (isAuthenticated) { %>
+            <a class="mr-2" href="/cart"><img style="height:4vh; width:auto;" src="https://cdn4.iconfinder.com/data/icons/ui-admin-side-menu-set-32-vol-2/40/Cart-512.png"></a>
+            <form action="/logout" method="POST">
+                <button type="submit">Logout</button>
+            </form>
+            <% } else { %>
+                <a href="/login" class="btn">Log In</a>
+                <% } %>
     </nav>
 </header>
 
-<nav class="mobile-nav">
+<!-- <nav class="mobile-nav">
     <ul class="mobile-nav__item-list">
         <li class="mobile-nav__item">
             <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
-        </li>
-        <li class="mobile-nav__item">
-            <a class="<%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
-        </li>
-        <% if (isAuthenticated) { %>
-            <li class="mobile-nav__item">
-                <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
-            </li>
-            <li class="mobile-nav__item">
-                <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
-            </li>
-            <li class="mobile-nav__item">
-                <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product
+                    </li>
+                    <li class="mobile-nav__item">
+                        <a class="<%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
+                    </li>
+                    <% if (isAuthenticated) { %>
+                        <li class="mobile-nav__item">
+                            <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
+                        </li>
+                        <li class="mobile-nav__item">
+                            <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+                        </li>
+                        <li class="mobile-nav__item">
+                            <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product
             </a>
-            </li>
-            <li class="mobile-nav__item">
-                <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
+                        </li>
+                        <li class="mobile-nav__item">
+                            <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
             </a>
-            </li>
-            <% } %>
-    </ul>
-</nav>
+                        </li>
+                        <% } %>
+                            </ul>
+    </nav> -->
