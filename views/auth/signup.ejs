@@ -47,6 +47,7 @@
                                     <label for="exampleInputPassword1" class="form-label">Password</label>
                                     <input type="password" name="confirmPassword" class="form-control" id="exampleInputPassword1">
                                 </div>
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                 <button type="submit" class="btn btn-primary">Sign Up</button>
                             </form>
                             <div class="signup mb-5">

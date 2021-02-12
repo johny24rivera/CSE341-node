@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const flash = require('connect-flash');
+const csrf = require('csurf');
 
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = "mongodb+srv://GoldCode:aTZGS2Gu0VQJU27G@cluster0.qz6md.mongodb.net/shop"
@@ -20,6 +21,7 @@ const store = new MongoDBStore({
     uri: MONGODB_URI,
     collection: 'sessions',
 });
+const csrfProtection = csrf();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -32,6 +34,7 @@ const locationRoutes = require('./routes/location');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'my secret', resave: false, saveUninitialized: false, store: store }));
+app.use(csrfProtection);
 
 app.use((req, res, next) => {
     if (!req.session.user) {
@@ -43,6 +46,17 @@ app.use((req, res, next) => {
             next();
         })
         .catch(err => console.log(err));
+});
+
+app.use((req, res, next) => {
+    let isLoggedIn = false;
+    if (req.session.isLoggedIn) {
+        isLoggedIn = req.session.isLoggedIn;
+    };
+
+    res.locals.isAuthenticated = isLoggedIn;
+    res.locals.csrfToken = req.csrfToken();
+    next();
 });
 app.use(flash());
 

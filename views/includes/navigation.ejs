@@ -49,7 +49,7 @@
                     <li class="nav-item"><a class="nav-link" href="/products">Menu</a></li>
                     <li class="nav-item"><a class="nav-link" href="/location">Hours and Locations</a></li>
                     <% if (isAuthenticated) { %>
-                        <li class="nav-item"><a class="nav-link" href="/admin/add-product">Add Product</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/admin/add-product">Add Products</a></li>
                         <li class="nav-item"><a class="nav-link" href="/admin/products">Admin Products</a></li>
                         <% } %>
                 </ul>
@@ -58,6 +58,7 @@
         <% if (isAuthenticated) { %>
             <a class="mr-2" href="/cart"><img style="height:4vh; width:auto;" src="https://cdn4.iconfinder.com/data/icons/ui-admin-side-menu-set-32-vol-2/40/Cart-512.png"></a>
             <form action="/logout" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button type="submit">Logout</button>
             </form>
             <% } else { %>

@@ -47,16 +47,10 @@ exports.getProduct = (req, res, next) => {
 exports.getIndex = (req, res, next) => {
     Product.find()
         .then(products => {
-            let isLoggedIn = false;
-
-            if (req.session.isLoggedIn) {
-                isLoggedIn = req.session.isLoggedIn;
-            };
             res.render('shop/index', {
                 prods: products,
                 pageTitle: 'Shop',
                 path: '/',
-                isAuthenticated: isLoggedIn,
             });
         })
         .catch(err => {
@@ -76,6 +70,7 @@ exports.getCart = (req, res, next) => {
             };
 
             const products = user.cart.items;
+            console.log(products);
             res.render('shop/cart', {
                 path: '/cart',
                 pageTitle: 'Your Cart',
